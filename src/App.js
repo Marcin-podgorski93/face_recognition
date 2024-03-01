@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Navigation from './Components/Navigation/Navigation';
+import FaceRecognition from './Components/FaceRecognition/FaceRecognition';
 import Logo from './Components/Logo/Logo';
 import Rank from './Components/Rank/Rank';
 import ImageLink from './Components/ImageLink/ImageLink';
@@ -16,7 +17,11 @@ class App extends Component {
   }
 
   onInputChange = (event) => {
-    console.log(event.target.value);
+    console.log(event.target.value); //dzieki .target.value dostaje w terminalu informacje co zostala nacisniete
+  }
+
+  onButtonSubmit = () => {
+    console.log('click');
   }
 
  render() {
@@ -26,9 +31,10 @@ class App extends Component {
       <Logo />
       <Rank />
       <ImageLink 
-        onInputChange={this.onInputChange} 
+        onInputChange={this.onInputChange}
+        onButtonSubmit={this.onButtonSubmit} 
       />
-      {/* <FaceRecognition /> */}
+      <FaceRecognition />
     </div>
   );
  }
