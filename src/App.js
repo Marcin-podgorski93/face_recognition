@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 // import Clarifai from 'clarifai';
 import Navigation from './Components/Navigation/Navigation';
 import FaceRecognition from './Components/FaceRecognition/FaceRecognition';
+import Signin from './Components/Signin/Signin';
 import Logo from './Components/Logo/Logo';
 import Rank from './Components/Rank/Rank';
 import ImageLink from './Components/ImageLink/ImageLink';
@@ -63,6 +64,7 @@ class App extends Component {
       input: '',
       imageUrl: '',
       box: {},
+      route: 'signin',
       user: {
         id: '',
       }
@@ -118,19 +120,28 @@ class App extends Component {
     .catch(err => console.log(err));
 }
 
+  onRouteChange = (route) => {
+    this.setState({route: route});
+  }
+
 
  render() {
   const { imageUrl, box } = this.state;
   return (
     <div className="App">
-      <Navigation />
-      <Logo />
-      <Rank />
-      <ImageLink 
-        onInputChange={this.onInputChange}
-        onButtonSubmit={this.onButtonSubmit} 
-      />
-      <FaceRecognition box={box} imageUrl={imageUrl} />
+      <Navigation onRouteChange={this.onRouteChange} />
+    { this.state.route === 'signin'
+      ? <Signin onRouteChange={this.onRouteChange} />
+      : <div>
+          <Logo />
+          <Rank />
+          <ImageLink 
+            onInputChange={this.onInputChange}
+            onButtonSubmit={this.onButtonSubmit} 
+          />
+          <FaceRecognition box={box} imageUrl={imageUrl} />
+        </div>
+    }
     </div>
   );
  }
